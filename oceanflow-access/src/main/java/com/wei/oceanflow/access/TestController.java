@@ -5,6 +5,7 @@ import com.wei.oceanflow.support.dao.MessageTemplateDao;
 import com.wei.oceanflow.support.domain.MessageTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +21,15 @@ public class TestController {
 
     @Autowired
     private MessageTemplateDao messageTemplateDao;
+
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
+    @RequestMapping("/redis")
+    private String redis(){
+        stringRedisTemplate.opsForValue().set("Daryl", "Way");
+        return stringRedisTemplate.opsForValue().get("Daryl");
+    }
 
     @RequestMapping("/test")
     private String test() {
