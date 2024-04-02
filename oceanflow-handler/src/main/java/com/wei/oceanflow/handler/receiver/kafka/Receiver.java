@@ -3,10 +3,12 @@ package com.wei.oceanflow.handler.receiver.kafka;
 import cn.hutool.core.collection.CollUtil;
 import com.alibaba.fastjson.JSON;
 import com.wei.oceanflow.common.domain.TaskInfo;
+import com.wei.oceanflow.handler.service.ConsumeService;
 import com.wei.oceanflow.handler.utils.GroupIdMappingUtils;
 import com.wei.oceanflow.support.constans.MessageQueuePipeline;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Scope;
@@ -26,8 +28,12 @@ import java.util.Optional;
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 @ConditionalOnProperty(name = "oceanflow.mq.pipeline", havingValue = MessageQueuePipeline.KAFKA)
 public class Receiver {
+
+    @Autowired
+    private ConsumeService consumeService;
+
     /**
-     * 发送消息
+     * 消费消息并调用ConsumeService
      *
      * @param consumerRecord
      * @param topicGroupId
@@ -44,6 +50,7 @@ public class Receiver {
              */
             if (topicGroupId.equals(messageGroupId)) {
                 log.info("groupId:{},params:{}", messageGroupId, JSON.toJSONString(taskInfoLists));
+                consumeService.consume2send(taskInfoLists);
             }
         }
     }

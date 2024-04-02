@@ -1,15 +1,13 @@
-package com.wei.oceanflow.web;
+package com.wei.oceanflow.access;
 
 import com.alibaba.fastjson.JSON;
 import com.wei.oceanflow.support.dao.MessageTemplateDao;
 import com.wei.oceanflow.support.domain.MessageTemplate;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
