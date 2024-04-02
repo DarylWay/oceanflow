@@ -1,4 +1,4 @@
-package com.wei.oceanflow.handler.handler;
+package com.wei.oceanflow.common.constant;
 
 
 import cn.hutool.core.util.IdUtil;

@@ -18,6 +18,12 @@ import lombok.experimental.Accessors;
 public class SendRequest {
 
     /**
+     * 执行业务类型
+     * send:发送消息
+     */
+    private String code;
+
+    /**
      * 消息模板Id，必传
      */
     private Long messageTemplateId;
