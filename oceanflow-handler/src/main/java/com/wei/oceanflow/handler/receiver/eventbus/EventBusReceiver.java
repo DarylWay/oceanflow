@@ -1,4 +1,4 @@
-package com.wei.oceanflow.eventbus;
+package com.wei.oceanflow.handler.receiver.eventbus;
 
 import com.alibaba.fastjson.JSON;
 import com.google.common.eventbus.Subscribe;
