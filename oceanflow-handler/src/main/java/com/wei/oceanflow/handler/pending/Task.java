@@ -1,9 +1,12 @@
 package com.wei.oceanflow.handler.pending;
 
+import cn.hutool.core.collection.CollUtil;
 import com.wei.oceanflow.common.domain.TaskInfo;
+import com.wei.oceanflow.handler.handler.HandlerHolder;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -25,6 +28,9 @@ public class Task implements Runnable{
 
     private TaskInfo taskInfo;
 
+    @Autowired
+    private HandlerHolder handlerHolder;
+
     @Override
     public void run() {
         log.info("task:" + Thread.currentThread().getName());
@@ -41,9 +47,9 @@ public class Task implements Runnable{
 //            deduplicationRuleService.duplication(taskInfo);
 //        }
 //
-//        // 3. 真正发送消息
-//        if (CollUtil.isNotEmpty(taskInfo.getReceiver())) {
-//            handlerHolder.route(taskInfo.getSendChannel()).doHandler(taskInfo);
-//        }
+        // 3. 真正发送消息
+        if (CollUtil.isNotEmpty(taskInfo.getReceiver())) {
+            handlerHolder.route(taskInfo.getSendChannel()).doHandler(taskInfo);
+        }
     }
 }

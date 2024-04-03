@@ -70,6 +70,13 @@
                 <version>1.0.2</version>
             </dependency>
 
+            <!--邮件发送-->
+            <dependency>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>javax.mail</artifactId>
+                <version>1.6.2</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>
