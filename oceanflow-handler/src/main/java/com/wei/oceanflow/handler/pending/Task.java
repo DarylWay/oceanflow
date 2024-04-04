@@ -2,6 +2,7 @@ package com.wei.oceanflow.handler.pending;
 
 import cn.hutool.core.collection.CollUtil;
 import com.wei.oceanflow.common.domain.TaskInfo;
+import com.wei.oceanflow.handler.deduplication.DeduplicationRuleService;
 import com.wei.oceanflow.handler.handler.HandlerHolder;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -31,6 +32,9 @@ public class Task implements Runnable{
     @Autowired
     private HandlerHolder handlerHolder;
 
+    @Autowired
+    private DeduplicationRuleService deduplicationRuleService;
+
     @Override
     public void run() {
         log.info("task:" + Thread.currentThread().getName());
@@ -42,11 +46,11 @@ public class Task implements Runnable{
 //        // 1. 屏蔽消息
 //        shieldService.shield(taskInfo);
 //
-//        // 2.平台通用去重
-//        if (CollUtil.isNotEmpty(taskInfo.getReceiver())) {
-//            deduplicationRuleService.duplication(taskInfo);
-//        }
-//
+        // 2.平台通用去重
+        if (CollUtil.isNotEmpty(taskInfo.getReceiver())) {
+            deduplicationRuleService.duplication(taskInfo);
+        }
+
         // 3. 真正发送消息
         if (CollUtil.isNotEmpty(taskInfo.getReceiver())) {
             handlerHolder.route(taskInfo.getSendChannel()).doHandler(taskInfo);
