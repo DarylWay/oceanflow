@@ -38,7 +38,7 @@ public class Receiver {
      * @param consumerRecord
      * @param topicGroupId
      */
-    @KafkaListener(topics = "#{'${oceanflow.business.topic.name}'}", containerFactory = "filterContainerFactory")
+    @KafkaListener(topics = "#{'${oceanflow.business.topic.name}'}")
     public void consumer(ConsumerRecord<?, String> consumerRecord, @Header(KafkaHeaders.GROUP_ID) String topicGroupId) {
         Optional<String> kafkaMessage = Optional.ofNullable(consumerRecord.value());
         if (kafkaMessage.isPresent()) {

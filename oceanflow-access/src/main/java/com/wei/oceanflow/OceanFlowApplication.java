@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 
 /**
  * @author wei
  */
 @SpringBootApplication
+@EnableScheduling
 public class OceanFlowApplication implements CommandLineRunner {
 
     @Autowired
