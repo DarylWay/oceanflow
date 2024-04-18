@@ -1,5 +1,6 @@
 package com.wei.oceanflow.service.api.impl.service;
 
+import cn.monitor4all.logRecord.annotation.OperationLog;
 import com.wei.oceanflow.common.vo.BasicResultVO;
 import com.wei.oceanflow.service.api.domain.SendRequest;
 import com.wei.oceanflow.service.api.domain.SendResponse;
@@ -22,6 +23,7 @@ public class SendServiceImpl implements SendService {
     private ProcessController processController;
 
     @Override
+    @OperationLog(bizType = "SendService#send", bizId = "#sendRequest.messageTemplateId", msg = "#sendRequest")
     public SendResponse send(SendRequest sendRequest) {
 
         SendTaskModel sendTaskModel = SendTaskModel.builder()
