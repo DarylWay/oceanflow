@@ -49,13 +49,7 @@ public enum AnchorState {
     /**
      * 下发失败（调用渠道接口失败）
      */
-    SEND_FAIL(70, "消息下发失败"),
-
-    /**
-     * 点击（下发的消息被点击）
-     */
-    CLICK(0100, "消息被点击"),
-    ;
+    SEND_FAIL(70, "消息下发失败");
 
 
     private final Integer code;

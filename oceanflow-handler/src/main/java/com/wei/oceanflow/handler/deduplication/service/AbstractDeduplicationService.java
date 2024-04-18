@@ -1,10 +1,12 @@
 package com.wei.oceanflow.handler.deduplication.service;
 
 import cn.hutool.core.collection.CollUtil;
+import com.wei.oceanflow.common.domain.AnchorInfo;
 import com.wei.oceanflow.common.domain.TaskInfo;
 import com.wei.oceanflow.handler.deduplication.DeduplicationHolder;
 import com.wei.oceanflow.handler.deduplication.DeduplicationParam;
 import com.wei.oceanflow.handler.deduplication.limit.LimitService;
+import com.wei.oceanflow.support.utils.LogUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -29,8 +31,8 @@ public abstract class AbstractDeduplicationService implements DeduplicationServi
         deduplicationHolder.putService(deduplicationType, this);
     }
 
-//    @Autowired
-//    private LogUtils logUtils;
+    @Autowired
+    private LogUtils logUtils;
 
 
     @Override
@@ -42,7 +44,7 @@ public abstract class AbstractDeduplicationService implements DeduplicationServi
         // 剔除符合去重条件的用户
         if (CollUtil.isNotEmpty(filterReceiver)) {
             taskInfo.getReceiver().removeAll(filterReceiver);
-            //logUtils.print(AnchorInfo.builder().businessId(taskInfo.getBusinessId()).ids(filterReceiver).state(param.getAnchorState().getCode()).build());
+            logUtils.print(AnchorInfo.builder().businessId(taskInfo.getBusinessId()).ids(filterReceiver).state(param.getAnchorState().getCode()).build());
         }
     }
 
